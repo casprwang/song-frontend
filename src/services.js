@@ -34,11 +34,23 @@ const deleteNoteById = async (id) => {
     .catch(e => console.error(e))
 }
 
-// curl -X POST -d "lol"  -i localhost:3000/note
+const editNote = async (id, content) => {
+  if (!id) return
+  let options = {
+    method: 'PUT',
+    body: content,
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  }
+  return fetch(URL + 'note?id=' + id, options)
+    .catch(e => console.error(e))
+}
 
 
 export default {
   getNotes,
   postNote,
   deleteNoteById,
+  editNote,
 }
