@@ -5,14 +5,13 @@ const mapStateToProps = state => ({
   notes: state.notes
 })
 
-const ConnectedList = ({notes}) =>
+const ConnectedList = ({ notes }) => (
   <ul>
-    {notes.map((note, i)=>
-      <li key={i}>
-        {note.content}
-      </li>
-    )}
+    {notes.map((note, i) => (
+      <li key={i}>{note.content}</li>
+    ))}
   </ul>
+)
 
 const NoteList = connect(mapStateToProps)(ConnectedList)
 
