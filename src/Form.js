@@ -11,25 +11,27 @@ const Form = props => {
   }
 
   return (
-    <form onSubmit={(e) => this.handleSubmit(e)}>
+    <form onSubmit={e => this.handleSubmit(e)}>
       <label>
         Text:
         <textarea
           value={props.draft.content}
-          onChange={(e) => props.onNoteChange(e.target.value)}
-          onKeyDown={(e) => keyHandler(e)}
+          onChange={e => props.onNoteChange(e.target.value)}
+          onKeyDown={e => keyHandler(e)}
         />
       </label>
-      <input type="submit" value="Submit" />
     </form>
   )
 }
 
 const mapDispatchToProps = dispatch => ({
-  addNote: (content) => dispatch(addNote(content)),
-  onNoteChange: (content) => dispatch(changeDraft(content)),
+  addNote: content => dispatch(addNote(content)),
+  onNoteChange: content => dispatch(changeDraft(content))
 })
 
 const mapStateToProps = state => ({ ...state })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Form)

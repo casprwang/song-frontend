@@ -5,13 +5,15 @@ const URL = 'http://localhost:3000/'
 const getNotes = async () =>
   fetch(URL + 'note')
     .then(res => res.json())
-    .then(notes => notes.map(note => {
-      note.id = utils.toHexString(note.id)
-      return note
-    }))
+    .then(notes =>
+      notes.map(note => {
+        note.id = utils.toHexString(note.id)
+        return note
+      })
+    )
     .catch(e => console.error(e))
 
-const postNote = async (text) => {
+const postNote = async text => {
   if (!text) return
   let options = {
     method: 'POST',
@@ -25,16 +27,16 @@ const postNote = async (text) => {
     .catch(e => console.error(e))
 }
 
-const deleteNoteById = async (id) => {
+const deleteNoteById = async id => {
   if (!id) return
   let options = {
-    method: 'DELETE',
+    method: 'DELETE'
   }
-  return fetch(URL + 'note?id=' + id, options)
-    .catch(e => console.error(e))
+  return fetch(URL + 'note?id=' + id, options).catch(e => console.error(e))
 }
 
 const editNote = async (id, content) => {
+  console.log('on edit')
   if (!id) return
   let options = {
     method: 'PUT',
@@ -43,14 +45,12 @@ const editNote = async (id, content) => {
       'Content-Type': 'text/plain'
     }
   }
-  return fetch(URL + 'note?id=' + id, options)
-    .catch(e => console.error(e))
+  return fetch(URL + 'note?id=' + id, options).catch(e => console.error(e))
 }
-
 
 export default {
   getNotes,
   postNote,
   deleteNoteById,
-  editNote,
+  editNote
 }

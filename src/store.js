@@ -3,11 +3,12 @@ import thunkMiddleware from 'redux-thunk'
 
 const initialState = {
   notes: [],
+  editContent: '',
+  isEditing: false,
   draft: {
     content: ''
   }
 }
-
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -32,6 +33,24 @@ const rootReducer = (state, action) => {
       },
       notes: [...state.notes, action.payload]
     }
+  case 'START_EDIT':
+    return {
+      ...state,
+      isEditing: true,
+      editContent: action.payload
+    }
+  case 'EDIT_CHANGE':
+    return {
+      ...state,
+      isEditing: true,
+      editContent: action.payload
+    }
+  case 'EDIT_NOTE':
+    return {
+      ...state,
+      isEditing: false,
+      editContent: ''
+    }
   case 'DELETE_NOTE':
     return {
       ...state
@@ -41,7 +60,10 @@ const rootReducer = (state, action) => {
   }
 }
 
-
-const store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware))
+const store = createStore(
+  rootReducer,
+  initialState,
+  applyMiddleware(thunkMiddleware)
+)
 
 export default store
