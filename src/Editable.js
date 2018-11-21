@@ -14,21 +14,29 @@ const ConnectEditable = props => {
   }
 
   return props.curEditId === props.note.id ? (
-    <input
-      type="text"
+    <textarea
+      autoFocus
       value={props.editContent}
       onClick={e => clickHandler(e)}
       onChange={e => {
         props.onEditChange(e.target.value)
       }}
       onKeyDown={e => {
+        if (!props.editContent) return
         if (e.key === 'Escape') {
           props.onEditEnd(props.curEditId, props.editContent)
         }
       }}
     />
   ) : (
-    <span onClick={e => clickHandler(e)}>{props.note.content}</span>
+    <div
+      style={{
+        whiteSpace: 'pre'
+      }}
+      onClick={e => clickHandler(e)}
+    >
+      {props.note.content}
+    </div>
   )
 }
 
