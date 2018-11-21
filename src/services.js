@@ -36,7 +36,6 @@ const deleteNoteById = async id => {
 }
 
 const editNote = async (id, content) => {
-  console.log('on edit')
   if (!id) return
   let options = {
     method: 'PUT',

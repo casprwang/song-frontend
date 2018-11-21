@@ -5,6 +5,7 @@ const initialState = {
   notes: [],
   editContent: '',
   isEditing: false,
+  curEditId: '',
   draft: {
     content: ''
   }
@@ -36,8 +37,9 @@ const rootReducer = (state, action) => {
   case 'START_EDIT':
     return {
       ...state,
+      curEditId: action.payload.id,
       isEditing: true,
-      editContent: action.payload
+      editContent: action.payload.content
     }
   case 'EDIT_CHANGE':
     return {
@@ -45,9 +47,10 @@ const rootReducer = (state, action) => {
       isEditing: true,
       editContent: action.payload
     }
-  case 'EDIT_NOTE':
+  case 'END_EDIT':
     return {
       ...state,
+      curEditId: '',
       isEditing: false,
       editContent: ''
     }

@@ -31,10 +31,10 @@ export const deleteNote = id => async dispatch => {
   }
 }
 
-export const editNote = (id, content) => async dispatch => {
+export const endEdit = (id, content) => async dispatch => {
   try {
     await api.editNote(id, content)
-    dispatch({ type: 'EDIT_NOTE' })
+    dispatch({ type: 'END_EDIT' })
     dispatch(fetchNotes())
   } catch (e) {
     console.error(e)
@@ -51,7 +51,7 @@ export const changeDraft = content => ({
   payload: content
 })
 
-export const startEdit = content => ({
+export const startEdit = note => ({
   type: 'START_EDIT',
-  payload: content
+  payload: note
 })

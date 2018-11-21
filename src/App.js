@@ -19,10 +19,12 @@ const App = () => {
   )
 }
 
-
 const mapStateToProps = state => ({ ...state })
 const mapDispatchToProps = dispatch => ({
   loadNotes: () => dispatch(fetchNotes())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
