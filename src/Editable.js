@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { deleteNote, endEdit, changeEdit, startEdit } from './actions.js'
 
 const ConnectEditable = props => {
-  const clickHandler = e => {
+  const [minRow, setMinRow] = useState(2)
+  const resize = (e, id) => {
+    let ele = document.getElementById(id)
+    let minRows = 2
+    let rows
+    rows = Math.ceil((ele.scrollHeight - 40) / 16)
+    setMinRow(rows + minRows)
+  }
+
+  const clickHandler = (e, id) => {
     if (e) e.preventDefault()
+    resize(e, id)
     if (e.metaKey) {
       props.onDeleteNote(props.note.id)
     } else {
@@ -15,11 +25,16 @@ const ConnectEditable = props => {
 
   return props.curEditId === props.note.id ? (
     <textarea
+      id={props.note.id}
       autoFocus
+      data-min-rows={minRow}
+      rows={minRow}
+      cols="50"
       value={props.editContent}
-      onClick={e => clickHandler(e)}
+      onClick={e => clickHandler(e, props.note.id)}
       onChange={e => {
         props.onEditChange(e.target.value)
+        resize(e, props.note.id)
       }}
       onKeyDown={e => {
         if (!props.editContent) return
@@ -30,10 +45,11 @@ const ConnectEditable = props => {
     />
   ) : (
     <div
+      id={props.note.id}
       style={{
         whiteSpace: 'pre'
       }}
-      onClick={e => clickHandler(e)}
+      onClick={e => clickHandler(e, props.note.id)}
     >
       {props.note.content}
     </div>
