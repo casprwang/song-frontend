@@ -40,9 +40,8 @@ label:focus,
 
 .Form textarea {
   width: 500px;
-  min-height: 60px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1em;
   display: block;
   overflow: hidden;
   border-color: #eceff1;

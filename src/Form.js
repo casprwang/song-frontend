@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { addNote, changeDraft } from './actions.js'
 import { connect } from 'react-redux'
 
-const Form = props => {
-  const [height, setHeight] = useState('50px')
-  const resize = () => {
-    let ele = document.getElementById('upper-textarea')
-    setHeight(ele.scrollHeight - 40 + 'px')
-  }
+const resize = ele => {
+  ele.style.height = 'inherit'
+  ele.style.height = ele.scrollHeight + 'px'
+}
 
+const Form = props => {
   const keyHandler = e => {
     if (e.keyCode === 13 && e.metaKey) {
       if (e) e.preventDefault()
@@ -20,13 +19,10 @@ const Form = props => {
     <form id="" className="Form" onSubmit={e => this.handleSubmit(e)}>
       <textarea
         id="upper-textarea"
-        style={{
-          height: height
-        }}
         value={props.draft.content}
         onChange={e => {
           props.onNoteChange(e.target.value)
-          resize()
+          resize(e.target)
         }}
         onKeyDown={e => keyHandler(e)}
       />
