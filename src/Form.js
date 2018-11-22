@@ -2,9 +2,19 @@ import React from 'react'
 import { addNote, changeDraft } from './actions.js'
 import { connect } from 'react-redux'
 
+// https://codepen.io/tomhodgins/pen/baqMWL?editors=0010
 const resize = ele => {
+  let computed = getComputedStyle(ele)
   ele.style.height = 'inherit'
-  ele.style.height = ele.scrollHeight + 'px'
+  let height =
+    parseInt(computed.getPropertyValue('border-top-width'), 10) +
+    parseInt(computed.getPropertyValue('padding-top'), 10) +
+    ele.scrollHeight +
+    parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+    parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+
+  ele.style.height = ''
+  ele.style.height = height + 'px'
 }
 
 const Form = props => {

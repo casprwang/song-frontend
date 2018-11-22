@@ -3,9 +3,19 @@ import { connect } from 'react-redux'
 
 import { deleteNote, endEdit, changeEdit, startEdit } from './actions.js'
 
+// https://codepen.io/tomhodgins/pen/baqMWL?editors=0010
 const resize = ele => {
+  let computed = getComputedStyle(ele)
   ele.style.height = 'inherit'
-  ele.style.height = ele.scrollHeight + 'px'
+  let height =
+    ele.scrollHeight +
+    parseInt(computed.getPropertyValue('border-top-width'), 10) +
+    parseInt(computed.getPropertyValue('padding-top'), 10) +
+    parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+    parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+
+  ele.style.height = ''
+  ele.style.height = height + 'px'
 }
 
 const ConnectEditable = props => {
