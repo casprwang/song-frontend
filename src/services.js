@@ -1,16 +1,9 @@
-import utils from './utils'
-
 const URL = 'http://localhost:3000/'
 
 const getNotes = async () =>
   fetch(URL + 'note')
     .then(res => res.json())
-    .then(notes =>
-      notes.map(note => {
-        note.id = utils.toHexString(note.id)
-        return note
-      })
-    )
+    .then(notes => notes.sort(note => -note.updateTime))
     .catch(e => console.error(e))
 
 const postNote = async text => {

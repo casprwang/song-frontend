@@ -9,7 +9,7 @@ const ConnectEditable = props => {
     let ele = document.getElementById(id)
     let minRows = 2
     let rows
-    rows = Math.ceil((ele.scrollHeight - 40) / 16)
+    rows = Math.ceil((ele.scrollHeight - 40) / 18)
     setMinRow(rows + minRows)
   }
 

@@ -12,7 +12,6 @@ store.dispatch(fetchNotes())
 const App = () => {
   return (
     <div className="App">
-      <h1>Hello</h1>
       <Form />
       <NoteList />
     </div>
